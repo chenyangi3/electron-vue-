@@ -6,7 +6,9 @@
   "license": null,
   "main": "./dist/electron/main.js",
   "scripts": {
-    "build": "node .electron-vue/build.js && electron-builder",
+    "build": "node .electron-vue/build.js && electron-builder --platform=win32  --arch=ia32",
+    "win32": "node .electron-vue/build.js && electron-builder --platform=win32  --arch=ia32",
+    "mac": "node .electron-vue/build.js && electron-builder --platform=drwin ",
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
@@ -56,9 +58,11 @@
     }
   },
   "dependencies": {
+    "asar": "^1.0.0",
     "axios": "^0.18.0",
     "babel-plugin-component": "^1.1.1",
     "element-ui": "^2.6.1",
+    "global": "^4.3.2",
     "moment": "^2.24.0",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",

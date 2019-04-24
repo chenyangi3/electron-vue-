@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import { Input, Button, DatePicker, Message } from 'element-ui'
 import Print from './utils/print'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(Input)
 Vue.use(Button)
