@@ -83,10 +83,10 @@ export default {
     },
     handleExport () {
       let vm = this
-      vm.formData.rmbCap = digitUppercase(this.formData.money)
-      vm.formData.issueDate = vm.formData.issueDate.replace(/-/g, '').split('')
-      vm.formData.dateCap = small2big(vm.formData.issueDate)
-      const {issueDate, paymentBankName, payee, drawerAccount, rmbCap} = vm.formData
+      // vm.formData.rmbCap = digitUppercase(this.formData.money)
+      // vm.formData.issueDate = vm.formData.issueDate.replace(/-/g, '').split('')
+      // vm.formData.dateCap = small2big(vm.formData.issueDate)
+      const {issueDate, paymentBankName, payee, drawerAccount} = vm.formData
       console.log(this.formData)
       if (!issueDate) {
         vm.$message({
@@ -120,7 +120,7 @@ export default {
         })
         return false
       }
-      if (!rmbCap) {
+      if (!this.formData.money) {
         vm.$message({
           showClose: true,
           message: '请输入小写人民币金额',
@@ -128,6 +128,17 @@ export default {
         })
         return false
       }
+      if (Number(this.formData.money) > 500000) {
+        vm.$message({
+          showClose: true,
+          message: '最大金额为50万',
+          type: 'warning'
+        })
+        return false
+      }
+      vm.formData.rmbCap = digitUppercase(this.formData.money)
+      vm.formData.issueDate = vm.formData.issueDate.replace(/-/g, '').split('')
+      vm.formData.dateCap = small2big(vm.formData.issueDate)
       vm.$router.push({
         name: 'print-template',
         params: vm.formData
@@ -149,12 +160,12 @@ export default {
 
   #wrapper {
     margin: 0 auto;
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
+    // background:
+    //   radial-gradient(
+    //     ellipse at top left,
+    //     rgba(255, 255, 255, 1) 40%,
+    //     rgba(229, 229, 229, .9) 100%
+    //   );
     height: 100vh;
     padding: 60px 80px;
     width: 100vw;
