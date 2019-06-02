@@ -55,8 +55,20 @@ export function digitUppercase (n) {
 export function small2big (data) {
   let result = ''
   let capNumArray = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
-  data.map(val => {
-    result += capNumArray[val]
-  })
+  let doubleUnit = ['壹拾', '贰拾', '叁拾']
+  let numberData = data.split('')
+  console.log('数组', numberData)
+  if (numberData.length === 2 && numberData[1] === '0') {
+    console.log(1)
+    result = doubleUnit[numberData[0] - 1]
+  } else if (numberData.length === 2 && numberData[1] !== '0' && numberData[0] !== '0') {
+    console.log(2)
+    result = doubleUnit[numberData[0] - 1] + capNumArray[numberData[1]]
+  } else {
+    console.log(3)
+    numberData.forEach(val => {
+      result += capNumArray[val]
+    })
+  }
   return result
 }

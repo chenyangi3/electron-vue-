@@ -1,29 +1,23 @@
 <template>
     <div>
-        <section ref="printTemplate" style="margin-top: 26px;line-height: 33pt;">
-            <p style="margin:0pt; orphans:0; text-align:justify; text-indent:65pt; widows:0">
+        <section ref="printTemplate" style="margin-top: 24px;line-height: 16pt;">
+            <p style="margin:0pt; orphans:0; text-align:justify; text-indent:75pt; widows:0;position:relative;">
               <span style="font-family:宋体; font-size:10.5pt">{{formData.year}}</span>
-              <span style="font-family:宋体; font-size:10.5pt">&nbsp;&nbsp;&nbsp; </span>
-              <span style="font-family:宋体; font-size:10.5pt">{{formData.month}}</span>
-              <span style="font-family:宋体; font-size:10.5pt">&nbsp;&nbsp;&nbsp; </span>
-              <span style="font-family:宋体; font-size:10.5pt">{{formData.day}}</span>
-              <span style="font-family:宋体; font-size:10.5pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <span style="font-family:宋体; font-size:10.5pt">{{formData.paymentBankName}}</span>
+              <span style="font-family:宋体; font-size:10.5pt;position:absolute;left:60pt;">{{formData.month}}</span>
+              <span style="font-family:宋体; font-size:10.5pt;position:absolute;left:107pt;">{{formData.day}}</span>
+              <span style="font-family:宋体; font-size:10.5pt;position:absolute;left:220pt;">{{formData.paymentBankName}}</span>
             </p>
-            <p style="margin:0pt; orphans:0; text-align:justify; text-indent:20.25pt; widows:0">
-              <span style="font-family:宋体; font-size:10.5pt">{{formData.payee}}</span>
-              <span style="font-family:宋体; font-size:10.5pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-              <span style="font-family:Calibri; font-size:10.5pt">{{formData.drawerAccount}}</span>
+            <p style="margin:0pt; orphans:0; text-align:justify; text-indent:26pt; widows:0;position:relative;">
+              <span style="font-family:宋体; font-size:10.5pt">&nbsp;{{formData.payee}}</span>
+              <span style="font-family:Calibri; font-size:10.5pt;position:absolute;left:280pt">{{formData.drawerAccount}}</span>
             </p>
-            <p style="margin:0pt; orphans:0; text-align:justify; text-indent:20.25pt; widows:0">
-              <span style="font-family:Calibri; font-size:10.5pt">&nbsp; </span>
+            <p style="margin-top:10px; orphans:0; text-align:justify; text-indent:26pt; widows:0;width:425pt;">
+              <span style="font-family:Calibri; font-size:10.5pt">&nbsp;&nbsp;&nbsp;&nbsp;</span>
               <span style="font-family:宋体; font-size:15pt">{{formData.rmbCap}}</span>
-              <span style="font-family:宋体; font-size:15pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-              <span style="font-family:宋体; font-size:10.5pt; letter-spacing:2.3pt">￥</span>
-              <span style="font-family:Calibri; font-size:10.5pt; letter-spacing:14px">{{formData.money}}</span>
+              <span style="font-family:宋体; font-size:10.5pt; letter-spacing:8px;float:right">￥{{formData.money}}</span>
             </p>
-            <p style="margin:0pt; orphans:0; text-align:justify; text-indent:5pt; widows:0">
-              <span style="font-family:宋体; font-size:12pt">{{formData.purpose}}</span>  
+            <p style="margin-top:8pt; orphans:0; text-align:justify; text-indent:10pt; widows:0">
+              <span style="font-family:宋体; font-size:12pt">&nbsp;{{formData.purpose}}</span>  
             </p>
         </section>
         <div class="button-area">
@@ -40,7 +34,7 @@ export default {
     return {
       formData: {
         issueDate: '',
-        dateCap: '',
+        date: '',
         paymentBankName: '',
         payee: '',
         drawerAccount: '',
@@ -50,11 +44,9 @@ export default {
   },
   mounted () {
     this.formData = this.$route.params
-    // this.formData.dateCap = `${this.formData.dateCap.substr(0, 4)}\xa0\xa0\xa0\xa0${this.formData.dateCap.substr(4, 2)}\xa0\xa0\xa0\xa0${this.formData.dateCap.substr(6)}`
-    this.formData.year = this.formData.dateCap.substr(0, 4)
-    this.formData.month = this.formData.dateCap.substr(4, 2)
-    this.formData.day = this.formData.dateCap.substr(6)
-    // this.formData.dateCap = `${this.formData.dateCap.substr(0, 4)}${this.formData.dateCap.substr(4, 2)}     ${this.formData.dateCap.substr(6)}`
+    this.formData.year = this.formData.date[0]
+    this.formData.month = this.formData.date[1]
+    this.formData.day = this.formData.date[2]
     this.formData.money = `${this.formData.money}`
     console.log(this.$route)
   },

@@ -73,7 +73,8 @@ export default {
         drawerAccount: '', // 出票人账号
         rmbCap: '', // 人民币大写
         money: '', // 人民币金额
-        purpose: '' // 用途
+        purpose: '', // 用途
+        date: []
       }
     }
   },
@@ -83,9 +84,6 @@ export default {
     },
     handleExport () {
       let vm = this
-      // vm.formData.rmbCap = digitUppercase(this.formData.money)
-      // vm.formData.issueDate = vm.formData.issueDate.replace(/-/g, '').split('')
-      // vm.formData.dateCap = small2big(vm.formData.issueDate)
       const {issueDate, paymentBankName, payee, drawerAccount} = vm.formData
       console.log(this.formData)
       if (!issueDate) {
@@ -137,8 +135,14 @@ export default {
         return false
       }
       vm.formData.rmbCap = digitUppercase(this.formData.money)
-      vm.formData.issueDate = vm.formData.issueDate.replace(/-/g, '').split('')
-      vm.formData.dateCap = small2big(vm.formData.issueDate)
+      vm.formData.money = this.formData.money.replace(/\./g, '')
+      vm.formData.transferDate = vm.formData.issueDate.split('-')
+      vm.formData.date = []
+      vm.formData.transferDate.map(item => {
+        item = small2big(item)
+        vm.formData.date.push(item)
+      })
+      // vm.formData.dateCap = small2big(vm.formData.issueDate)
       vm.$router.push({
         name: 'print-template',
         params: vm.formData
